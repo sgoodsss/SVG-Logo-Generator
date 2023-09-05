@@ -11,7 +11,10 @@
 // THEN I am shown a 300x200 pixel image that matches the criteria I entered
 
 const inquirer = require('inquirer');
-const jest = require(`jest`)
+const jest = require(`jest`);
+// const shapes = require(`./lib/shapes.js`);
+const {Triangle, Circle, Square} = require(`./lib/shapes.js`)
+
 
 // Created an array of questions for user input
 const questions = [
@@ -30,7 +33,7 @@ const questions = [
     },
     {
         type: `input`,
-        // Figure out how to make the colors correspond and the hexademical number to work
+        // Figure out how to make the colors correspond and the hexademical number to work (Pick from a list)
         message: `What color would you like the text to be?  Enter a color name or hexadecimal number!`,
         name: `textColor`,
         validate: textColor => {
@@ -72,6 +75,18 @@ const questions = [
     }
 ]
 
+function generateSVG(answers) {
+    if (answers.shape === `Triangle`) {
+        // Change to be instance of new triangle 
+        // Apply text to it 
+        Triangle.getSVG();
+    } else if (answers.shape === `Square`) {
+        Circle.getSVG();
+    } else {
+        Square.getSVG();
+    }
+}
+
 // Prompts User with Questions
 function runner() {
     return inquirer
@@ -79,7 +94,7 @@ function runner() {
         .prompt(questions)
         .then((answers) => {
             // Uses our generateMarkdown js page to change our answers into a string (from last assignment)
-            // writeToFile(`Generated-README.md`, generateMarkdown(answers));
+            writeToFile(`${answers.characters}.svg`, generateSVG(answers));
             console.log(answers)
         })
         .then(() => console.log(`Generated logo.svg`))
