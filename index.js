@@ -84,20 +84,24 @@ function generateSVG(answers) {
     userString =
         '<svg version="1.1" width="300" height="200" xmlns="http://www.w3.org/2000/svg">';
         //g tag puts text on top of polygon
-        svgString += "<g>";
+        userString += "<g>";
 
     if (answers.shape === `Triangle`) {
         // Change to be instance of new triangle 
         // Apply text to it 
-        const newTriangle = new Triangle.getSVG(); 
-        svgString += newTriangle
+        const newTriangle = new Triangle; 
+        userString += getSVG();
     } else if (answers.shape === `Square`) {
-        const newSquare = new Square.getSVG();
-        svgString += newSquare
+        const newSquare = new Square;
+        userString += getSVG();
     } else {
-        const newCircle = new Circle.getSVG();
-        svgString += newCircle
+        const newCircle = new Circle;
+        // getSVG function is not working????
+        userString += getSVG();
     }
+
+
+
 }
 
 // Prompts User with Questions
@@ -106,7 +110,7 @@ function runner() {
         // Uses Questions Array
         .prompt(questions)
         .then((answers) => {
-            writeToFile(`${answers.characters}.svg`, generateSVG(answers));
+            fs.writeToFile(`${answers.characters}.svg`, generateSVG(answers));
             console.log(answers)
         })
         .then(() => console.log(`Generated logo.svg`))
