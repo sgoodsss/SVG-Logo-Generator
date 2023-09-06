@@ -10,9 +10,13 @@
 // WHEN I open the `logo.svg` file in a browser
 // THEN I am shown a 300x200 pixel image that matches the criteria I entered
 
+// Inquirer
 const inquirer = require('inquirer');
+// Jest
 const jest = require(`jest`);
-// const shapes = require(`./lib/shapes.js`);
+//File system
+const fs = require("fs");
+// Importing classes from shapes.js
 const {Triangle, Circle, Square} = require(`./lib/shapes.js`)
 
 
@@ -76,14 +80,23 @@ const questions = [
 ]
 
 function generateSVG(answers) {
+    let userString = "";
+    userString =
+        '<svg version="1.1" width="300" height="200" xmlns="http://www.w3.org/2000/svg">';
+        //g tag puts text on top of polygon
+        svgString += "<g>";
+
     if (answers.shape === `Triangle`) {
         // Change to be instance of new triangle 
         // Apply text to it 
-        Triangle.getSVG();
+        const newTriangle = new Triangle.getSVG(); 
+        svgString += newTriangle
     } else if (answers.shape === `Square`) {
-        Circle.getSVG();
+        const newSquare = new Square.getSVG();
+        svgString += newSquare
     } else {
-        Square.getSVG();
+        const newCircle = new Circle.getSVG();
+        svgString += newCircle
     }
 }
 
@@ -93,7 +106,6 @@ function runner() {
         // Uses Questions Array
         .prompt(questions)
         .then((answers) => {
-            // Uses our generateMarkdown js page to change our answers into a string (from last assignment)
             writeToFile(`${answers.characters}.svg`, generateSVG(answers));
             console.log(answers)
         })
