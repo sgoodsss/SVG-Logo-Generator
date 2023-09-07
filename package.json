@@ -27,6 +27,7 @@
   },
   "homepage": "https://github.com/sgoodsss/SVG-Logo-Generator#readme",
   "dependencies": {
+    "fs": "^0.0.1-security",
     "inquirer": "^8.2.6",
     "jest": "^29.6.4"
   }

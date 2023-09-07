@@ -1,10 +1,4 @@
 // To Do
-// WHEN I am prompted for text
-// THEN I can enter up to three characters
-// WHEN I am prompted for the text color
-// THEN I can enter a color keyword (OR a hexadecimal number)
-// WHEN I am prompted for the shape's color
-// THEN I can enter a color keyword (OR a hexadecimal number)
 // WHEN I have entered input for all the prompts
 // THEN an SVG file is created named `logo.svg`
 // WHEN I open the `logo.svg` file in a browser
@@ -18,6 +12,7 @@ const jest = require(`jest`);
 const fs = require("fs");
 // Importing classes from shapes.js
 const {Triangle, Circle, Square} = require(`./lib/shapes.js`)
+const {writeFile} = require('fs').promises;
 
 
 // Created an array of questions for user input
@@ -105,17 +100,21 @@ function generateSVG(answers) {
 
 }
 
+const writeToFile = (fileName, data) => {
+    return writeFile(fileName, data)
+}
+
 // Prompts User with Questions
 function runner() {
     return inquirer
         // Uses Questions Array
         .prompt(questions)
+        //convert answers to json
         .then((answers) => {
-            fs.writeToFile(`${answers.characters}.svg`, generateSVG(answers));
+            fs.writeToFile(`logo.svg`, generateSVG(answers).toString());
             console.log(answers)
         })
         .then(() => console.log(`Generated logo.svg`))
-        .then(console.log(`End Program`))
         .catch((error) => {
            console.log(error)
         });
