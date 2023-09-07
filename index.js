@@ -90,17 +90,18 @@ function generateSVG(answers) {
         // Change to be instance of new triangle 
         // Apply text to it 
         const newTriangle = new Triangle; 
-        userString += getSVG();
+        userString += `<polygon points="150, 18 244, 182 56, 182" fill="${answers.shapeColor}"/>`
     } else if (answers.shape === `Square`) {
         const newSquare = new Square;
-        userString += getSVG();
+        userString += `<rect x="73" y="40" width="160" height="160" fill="${answers.shapeColor}"/>`
     } else {
         const newCircle = new Circle;
-        // getSVG function is not working????
-        userString += getSVG();
+        userString += `<circle cx="150" cy="115" r="80" fill="${answers.shapeColor}"/>`
     }
 
-
+    userString += `<text x="150" y="130" text-anchor="middle" font-size="40" fill="${answers.textColor}">${answers.characters}</text>`;
+    userString += "</g>";
+    userString += "</svg>";
 
 }
 
