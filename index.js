@@ -6,7 +6,6 @@ const jest = require(`jest`);
 const fs = require("fs");
 // Importing classes from shapes.js
 const {Triangle, Circle, Square} = require(`./lib/shapes.js`)
-// const {writeFile} = require('fs').promises;
 
 
 // Created an array of questions for user input
