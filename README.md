@@ -18,7 +18,8 @@
 
   ## Usage
     After installation is complete, run the following code: ‘node index.js’ in the terminal. Answer the prompts and after completion, a file called logo.svg will be updated with your changes.  Please watch the video linked below for a tutorial.
-  
+    
+    https://drive.google.com/file/d/1wh9RP0kxWF55Zi_umRThXqJNc4LPIS4E/view?usp=sharing
 
   ## Credits
   
