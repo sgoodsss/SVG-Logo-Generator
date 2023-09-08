@@ -12,7 +12,7 @@ const jest = require(`jest`);
 const fs = require("fs");
 // Importing classes from shapes.js
 const {Triangle, Circle, Square} = require(`./lib/shapes.js`)
-const {writeFile} = require('fs').promises;
+// const {writeFile} = require('fs').promises;
 
 
 // Created an array of questions for user input
@@ -74,7 +74,7 @@ const questions = [
     }
 ]
 
-function generateSVG(answers) {
+function generateSVG(fileName, answers) {
     let userString = "";
     userString =
         '<svg version="1.1" width="300" height="200" xmlns="http://www.w3.org/2000/svg">';
@@ -84,13 +84,13 @@ function generateSVG(answers) {
     if (answers.shape === `Triangle`) {
         // Change to be instance of new triangle 
         // Apply text to it 
-        const newTriangle = new Triangle; 
+        const newTriangle = new Triangle(); 
         userString += `<polygon points="150, 18 244, 182 56, 182" fill="${answers.shapeColor}"/>`
     } else if (answers.shape === `Square`) {
-        const newSquare = new Square;
+        const newSquare = new Square();
         userString += `<rect x="73" y="40" width="160" height="160" fill="${answers.shapeColor}"/>`
     } else {
-        const newCircle = new Circle;
+        const newCircle = new Circle();
         userString += `<circle cx="150" cy="115" r="80" fill="${answers.shapeColor}"/>`
     }
 
@@ -98,26 +98,41 @@ function generateSVG(answers) {
     userString += "</g>";
     userString += "</svg>";
 
+    fs.writeFile(fileName, userString, (err) => {
+        err ? console.log(err) : console.log(`Generated logo.svg`)
+    })
 }
 
-const writeToFile = (fileName, data) => {
-    return writeFile(fileName, data)
+function promptUser () {
+    inquirer
+        .prompt(questions)
+        .then((answers) => {
+            generateSVG(`logo.svg`, answers);
+        })
 }
+
+promptUser();
+
+// const writeToFile = (fileName, answers) => {
+//     return writeFile(fileName, answers)
+// }
 
 // Prompts User with Questions
-function runner() {
-    return inquirer
-        // Uses Questions Array
-        .prompt(questions)
-        //convert answers to json
-        .then((answers) => {
-            fs.writeToFile(`logo.svg`, generateSVG(answers).toString());
-            console.log(answers)
-        })
-        .then(() => console.log(`Generated logo.svg`))
-        .catch((error) => {
-           console.log(error)
-        });
-}
+// function runner() {
+//     return inquirer
+//         // Uses Questions Array
+//         .prompt(questions)
 
-runner();
+//         //convert answers to json
+//         .then((answers) => {
+//             //const answerz = answers.toString()
+//             writeToFile(`logo.svg`, generateSVG(JSON.stringify(answers)));
+//             console.log(JSON.stringify(answers))
+//         })
+//         .then(() => console.log(`Generated logo.svg`))
+//         .catch((error) => {
+//            console.log(error)
+//         });
+// }
+
+// runner();
