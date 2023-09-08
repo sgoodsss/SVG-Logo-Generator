@@ -106,27 +106,3 @@ function promptUser () {
 }
 
 promptUser();
-
-// const writeToFile = (fileName, answers) => {
-//     return writeFile(fileName, answers)
-// }
-
-// Prompts User with Questions
-// function runner() {
-//     return inquirer
-//         // Uses Questions Array
-//         .prompt(questions)
-
-//         //convert answers to json
-//         .then((answers) => {
-//             //const answerz = answers.toString()
-//             writeToFile(`logo.svg`, generateSVG(JSON.stringify(answers)));
-//             console.log(JSON.stringify(answers))
-//         })
-//         .then(() => console.log(`Generated logo.svg`))
-//         .catch((error) => {
-//            console.log(error)
-//         });
-// }
-
-// runner();
