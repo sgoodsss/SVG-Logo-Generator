@@ -1,9 +1,3 @@
-// To Do
-// WHEN I have entered input for all the prompts
-// THEN an SVG file is created named `logo.svg`
-// WHEN I open the `logo.svg` file in a browser
-// THEN I am shown a 300x200 pixel image that matches the criteria I entered
-
 // Inquirer
 const inquirer = require('inquirer');
 // Jest
